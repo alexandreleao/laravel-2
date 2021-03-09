@@ -1,18 +1,11 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProdutosController;
 
 
 Route::get('/', 'HomeController');
+
 Route::view('/teste', 'teste');
 
 Route::prefix('/config')->group(function () {
@@ -25,9 +18,9 @@ Route::prefix('/config')->group(function () {
 
 Route::prefix('/produtos')->group(function () {
 
-    Route::get('/', 'ProdutosController@listar')->name('produtos.listar');  //Listagem de Produtos
+    Route::get('/', [ ProdutosController::class, 'listar'])->name('produtos.listar');  //Listagem de Produtos
 
-    Route::get('adicionar', 'ProdutosController@adicionar')->name('produtos.adicionar');
+    Route::get('adicionar', [ProdutosController::class, 'adicionar'])->name('produtos.adicionar');
     Route::post('adicionar', 'ProdutosController@adicionarAction'); //Ação de adicionar novo produto
 
     Route::get('editar{id}', 'ProdutosController@editar')->name('produtos.editar'); //Editar Produto

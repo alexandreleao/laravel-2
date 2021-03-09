@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Produto;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -9,7 +10,7 @@ class ProdutosController extends Controller
 {
     public function listar()
     {
-        $listar = DB::select('SELECT * FROM produtos');
+        $listar = Produto::all(); // SELECT * FROM produtos
 
         return view('produtos.listar',[
             'listar' => $listar
@@ -30,7 +31,7 @@ class ProdutosController extends Controller
                 'titulo' => $titulo
             ]);
 
-          
+
 
             return redirect()->route('produtos.listar');
         }else{
@@ -48,14 +49,14 @@ class ProdutosController extends Controller
         ]);
 
         if(count($data) > 0){
-           
+
                 return view('produtos.editar',[
                     'data' => $data[0]
-                ]); 
+                ]);
            }else{
                return redirect()->route('produtos.listar');
            }
-    } 
+    }
 
     public function editarAction(Request $request, $id)
     {
@@ -67,7 +68,7 @@ class ProdutosController extends Controller
             ]);
             if(count($data) > 0){
                 DB::update('UPDATE produtos set titulo = :titulo where id = :id', [
-                    
+
                     'titulo' => $titulo,
                     'id' => $id
 
@@ -83,7 +84,7 @@ class ProdutosController extends Controller
     }
 
     public function deletar($id)
-    {   
+    {
         DB::delete('DELETE FROM produtos where id = :id', [
             'id' => $id
         ]);
