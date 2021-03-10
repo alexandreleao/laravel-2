@@ -5,15 +5,23 @@ namespace App\Http\Controllers;
 use App\Produto;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-
+use Illuminate\Support\Facades\View;
 class ProdutosController extends Controller
 {
     public function listar()
     {
-        $listar = Produto::all(); // SELECT * FROM produtos
+        $produtos = Produto::all(); // SELECT * FROM produtos
 
         return view('produtos.listar',[
-            'listar' => $listar
+            'produtos' => $produtos
+        ]);
+    }
+    public function visualizar($id)
+    {
+        $produto = Produto::find($id); // SELECT * FROM produtos where id = 1
+
+        return view('produtos.produto', [
+            'produto' => $produto
         ]);
     }
 
@@ -24,63 +32,30 @@ class ProdutosController extends Controller
 
     public function adicionarAction(Request $request)
     {
-        if($request->filled('titulo')){
-            $titulo = $request->input('titulo');
+        $produto = new Produto;
 
-            DB::insert('INSERT INTO produtos(titulo) VALUES (:titulo)', [
-                'titulo' => $titulo
-            ]);
+        $produto->titulo = $request->titulo;
+        $produto->descricao = $request->descricao;
 
-
-
+        if($produto->save()){
             return redirect()->route('produtos.listar');
-        }else{
-            return redirect()
-            ->route('produtos.adicionar')
-            ->with('warning','Você não preencheu o titulo!');
-
         }
+
+        return back()->withErrors([
+            "Não foi possível criar um novo produto"
+        ]);
     }
 
     public function editar($id)
     {
-        $data = DB::select('SELECT * FROM produtos where id = :id', [
-            'id' => $id
-        ]);
+        $produto = Produto::find($id);
 
-        if(count($data) > 0){
-
-                return view('produtos.editar',[
-                    'data' => $data[0]
-                ]);
-           }else{
-               return redirect()->route('produtos.listar');
-           }
+        return view('produtos.editar', ['produto'=>$produto]);
     }
 
     public function editarAction(Request $request, $id)
     {
-        if($request->filled('titulo')){
-            $titulo = $request->input('titulo');
 
-            $data = DB::select('SELECT * FROM produtos where id = :id', [
-                'id' => $id
-            ]);
-            if(count($data) > 0){
-                DB::update('UPDATE produtos set titulo = :titulo where id = :id', [
-
-                    'titulo' => $titulo,
-                    'id' => $id
-
-                ]);
-            }
-
-            return redirect()->route('produtos.listar');
-        }else{
-            return redirect()
-            ->route('produtos.editar', ['id'=>$id])
-            ->with('warning', 'Você não preencheu o titulo!');
-        }
     }
 
     public function deletar($id)
@@ -91,11 +66,5 @@ class ProdutosController extends Controller
         return redirect()->route('produtos.listar');
     }
 
-    public function done($id)
-    {
-        DB::update('UPDATE produtos SET concluido = 1 - concluido WHERE id = :id', [
-            'id' => $id
-        ]);
-        return redirect()->route('produtos.listar');
-    }
+
 }

@@ -1,24 +1,23 @@
-@extends('layouts.produtos')
+@extends('layouts.default')
 
 
 @section('title', 'Listagem de Produtos')
 
 @section('content')
-<h1>Listagem de Produtos</h1>
-
-<a href="{{route('produtos.adicionar')}}">Adicionar Novo Produto</a>
-@if(count($listar) > 0)
-    <ul>
-        @foreach($listar as $item)
-        <li>
-            <a href="{{route('produtos.done',['id'=>$item->id])}}"> [ @if($item->concluido===1) desmarcar @else marcar @endif ]</a>
-              {{$item->titulo}}
-            <a href="{{ route('produtos.editar', ['id'=>$item->id])}}"> [ editar ]</a>
-            <a href="{{ route('produtos.deletar', ['id'=>$item->id])}}" onclick="return confirm('Tem certeza que deseja excluir?')">[ excluir ]</a>
-        </li>
+<section>
+    <h1>Listagem de Produtos</h1>
+    <a class="btn btn-link" href="{{ route('produtos.adicionar')}} ">Adicionar</a>
+    <div>
+        @foreach ($produtos as $produto)
+        <div class="card">
+            <div class="card-body">
+            <h5 class="card-title">{{$produto->titulo}}</h5>
+            <a class="card-link" href="{{route('produtos.visualizar', ['id'=> $produto->id])}}">
+                Visualizar
+            </a>
+            </div>
+        </div>
         @endforeach
-    </ul>
-    @else
-    Não há item cadastrado!
-    @endif
+    </div>
+</section>
 @endsection
