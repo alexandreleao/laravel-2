@@ -11,7 +11,7 @@ class HomeController extends Controller
         $titulo = "TITULO DE TESTE";
         $frutas = ["maça", "morango", "pera"];
 
-        view('layouts.default', ['frutas' => implode(",", $frutas)]);
+        //view('layouts.default', ['frutas' => implode(",", $frutas)]);
 
         return view('index', [
             'titulo' => $titulo,

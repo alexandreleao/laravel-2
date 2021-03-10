@@ -17,12 +17,10 @@ Route::prefix('/produtos')->group(function () {
 
     Route::get('editar/{id}', [ProdutosController::class, 'editar'])->name('produtos.editar');
     Route::post('adicionar', [ProdutosController::class, 'adicionarAction']); //Ação de adicionar novo produto
+    Route::post('editar/{id}', [ProdutosController::class, 'editarAction']); //Ação de edição
 
-    //Route::get('editar{id}', 'ProdutosController@editar')->name('produtos.editar'); //Editar Produto
-    //Route::post('editar{id}', 'ProdutosController@editarAction'); //Ação de edição
+    Route::get('apagar/{id}', 'ProdutosController@deletar')->name('produtos.deletar'); //Ação de deletar
 
-    //Route::get('delete/{id}', 'ProdutosController@deletar')->name('produtos.deletar'); //Ação de deletar
-    //Route::get('marcar/{id}', 'ProdutosController@done')->name('produtos.done');  // Marcar resolvido
 
 
 });

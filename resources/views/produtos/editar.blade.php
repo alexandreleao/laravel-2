@@ -1,8 +1,13 @@
 @extends('layouts.default')
 
-@section('title' , ['title' => $title])
+@section('title' , 'Editar Produto')
 
 @section('content')
-<h1>{{$title}}</h1>
-@include('produtos.from-produtos', ['produto'=> $produto])
+<section class="card">
+    <div class="card-body">
+        <h1 class="card-title">Editar Produto</h1>
+        @include('produtos.form-produtos', ['produto'=> $produto])
+    </div>
+</section>
+
 @endsection

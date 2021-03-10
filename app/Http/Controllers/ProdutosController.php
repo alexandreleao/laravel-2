@@ -55,15 +55,28 @@ class ProdutosController extends Controller
 
     public function editarAction(Request $request, $id)
     {
+        $produto = Produto::find($id);
+
+        $produto->titulo = $request->titulo;
+        $produto->descricao = $request->descricao;
+
+        if($produto->save()){
+            return redirect()->route('produtos.visualizar', ['id' => $produto->id ]);
+        }
 
     }
 
     public function deletar($id)
     {
-        DB::delete('DELETE FROM produtos where id = :id', [
-            'id' => $id
-        ]);
-        return redirect()->route('produtos.listar');
+        $produto = Produto::find($id);
+
+        if($produto->delete()){
+            return redirect()->route('produtos.listar');
+        }
+
+        return back()->withErrors(
+            "Não foi possível deletar o produto"
+        );
     }
 
 

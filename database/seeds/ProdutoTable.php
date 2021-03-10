@@ -14,17 +14,20 @@ class ProdutoTable extends Seeder
     {
         Produto::create([
             'titulo' => 'Saia de criança',
-            'descricao' => 'Tamanho (P,M,G) - cores vermelho e azul'
+            'descricao' => 'Tamanho (P,M,G) - cores vermelho e azul',
+            'imagem' => 'https://picsum.photos/id/237/200/300'
         ]);
 
         Produto::create([
             'titulo' => 'Bike',
-            'descricao' => 'Bike para passeio estilo mountain bike'
+            'descricao' => 'Bike para passeio estilo mountain bike',
+            'imagem' => 'https://picsum.photos/id/1000/200/300'
         ]);
 
         Produto::create([
             'titulo' => 'Calça infantil',
-            'descricao' => 'Tamanho (P,M,G) - cores verde e amarelo'
+            'descricao' => 'Tamanho (P,M,G) - cores verde e amarelo',
+            'imagem' => 'https://picsum.photos/id/300/200/300'
         ]);
     }
 }
