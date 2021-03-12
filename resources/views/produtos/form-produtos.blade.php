@@ -23,4 +23,3 @@
 </form>
 
 @include('components/show-errors', ['errors' => $errors])
-@include('components/validated', ['errors' => $errors])

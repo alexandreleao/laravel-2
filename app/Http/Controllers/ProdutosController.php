@@ -36,6 +36,15 @@ class ProdutosController extends Controller
 
     public function adicionarAction(Request $request)
     {
+        
+       $validated = $request->validate([
+        'titulo' => 'required',
+        'descricao' => 'required',
+        'imagem' => 'required'
+       
+       ]); 
+
+        dd($request->validated(['titulo' => 'required']));
        
         $produto = new Produto;
 
@@ -47,14 +56,6 @@ class ProdutosController extends Controller
          $imagem = Storage::url($path);
          $produto->imagem = $imagem ? $imagem : null;
         }
-
-        $validate = $request->validate([
-        'titulo' => 'required',
-        'descricao' => 'required|unique:posts|max:255',
-        'imagem' => 'required',
-    ]);
-
-   
 
         if($produto->save()){
             return redirect()->route('produtos.listar');
