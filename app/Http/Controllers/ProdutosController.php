@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Produto;
 use Illuminate\Http\Request;
-
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\View;
@@ -37,6 +36,7 @@ class ProdutosController extends Controller
 
     public function adicionarAction(Request $request)
     {
+       
         $produto = new Produto;
 
         $produto->titulo = $request->titulo;
@@ -47,6 +47,14 @@ class ProdutosController extends Controller
          $imagem = Storage::url($path);
          $produto->imagem = $imagem ? $imagem : null;
         }
+
+        $validate = $request->validate([
+        'titulo' => 'required',
+        'descricao' => 'required|unique:posts|max:255',
+        'imagem' => 'required',
+    ]);
+
+   
 
         if($produto->save()){
             return redirect()->route('produtos.listar');

@@ -1,3 +1,7 @@
 @if($errors->any())
-    <h4 class="text-danger">{{$errors->first()}}</h4>
+@alert
+    @foreach($erros->all() as $error)
+        <h4 class="text-danger">{{$errors->first()}}</h4>
+    @endforeach   
+ @endalert   
 @endif
