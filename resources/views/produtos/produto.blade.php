@@ -8,7 +8,7 @@
         <div class="card-title">
             <h1>{{$produto->titulo}}</h1>
             <p>{{$produto->descricao}}</p>
-            <img src="{{$produto->imagem}}">
+            <img width="300" height="200" src="{{$produto->imagem}}">
             <a class="btn btn-link text-danger" href="{{route('produtos.editar', $produto->id)}}">
                 Editar
             </a>
