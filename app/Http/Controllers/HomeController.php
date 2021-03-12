@@ -18,4 +18,8 @@ class HomeController extends Controller
             'frutas' => $frutas
         ]);
     }
+    public function notFound()
+    {
+        return view('404');
+    }
 }
