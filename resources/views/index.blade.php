@@ -6,8 +6,8 @@ PAGINA DE INICIO: <h1>{{$titulo}}</h1>
 
 
 <ul class="list-group">
-    @foreach ($frutas as $fruta)
-    <li class="list-group-item">{{$fruta}}</li>
+    @foreach ($vidros as $vidro)
+    <li class="list-group-item">{{$vidro}}</li>
     @endforeach
 </ul>
 

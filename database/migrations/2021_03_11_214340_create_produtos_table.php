@@ -18,7 +18,7 @@ class CreateProdutosTable extends Migration
             $table->string('titulo'); // varchar
             $table->longText('descricao');
             $table->string('imagem');
-            $table->timestamps(); // created_at updated_at
+            $table->timestamps();
         });
     }
 
