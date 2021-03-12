@@ -9,13 +9,13 @@ class HomeController extends Controller
     public function index()
     {
         $titulo = "TITULO DE TESTE";
-        $frutas = ["maça", "morango", "pera"];
+        $vidros = ["brindex", "transparentes", "fantasia"];
 
         //view('layouts.default', ['frutas' => implode(",", $frutas)]);
 
         return view('index', [
             'titulo' => $titulo,
-            'frutas' => $frutas
+            'vidros' => $vidros
         ]);
     }
 }

@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Produto;
 use Illuminate\Http\Request;
+
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\View;
 
 
@@ -39,13 +41,12 @@ class ProdutosController extends Controller
 
         $produto->titulo = $request->titulo;
         $produto->descricao = $request->descricao;
-
-        if($request->hasFile("imagem")){
-            $request->imagem->store("images");
-        }
-
-       // $imagem = $request->get("images");
         
+        if($request->hasFile("imagem")){
+         $path = $request->imagem->store("images");
+         $imagem = Storage::url($path);
+         $produto->imagem = $imagem ? $imagem : null;
+        }
 
         if($produto->save()){
             return redirect()->route('produtos.listar');

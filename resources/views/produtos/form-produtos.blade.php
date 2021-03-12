@@ -13,7 +13,8 @@
 
     <div class="form-group">
         <label for="formFileLg" class="form-label">Produto:</label>
-        <input class="form-control form-control-lg" id="formFileLg" type="file" name="imagem">
+        <input class="form-control form-control-lg" id="formFileLg" type="file" name="imagem"
+             value="{{$produto ? $produto->imagem : ''}}">
     </div>
 
     <div class="form-group">
