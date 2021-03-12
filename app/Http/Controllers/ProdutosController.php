@@ -36,23 +36,21 @@ class ProdutosController extends Controller
 
     public function adicionarAction(Request $request)
     {
-        
+
        $validated = $request->validate([
         'titulo' => 'required',
         'descricao' => 'required',
         'imagem' => 'required'
-       
-       ]); 
 
-        dd($request->validated(['titulo' => 'required']));
-       
+       ]);
+
         $produto = new Produto;
 
         $produto->titulo = $request->titulo;
         $produto->descricao = $request->descricao;
-        
+
         if($request->hasFile("imagem")){
-         $path = $request->imagem->store("images");
+         $path = $request->imagem->store("public/images");
          $imagem = Storage::url($path);
          $produto->imagem = $imagem ? $imagem : null;
         }
