@@ -18,4 +18,8 @@ class HomeController extends Controller
             'vidros' => $vidros
         ]);
     }
+    public function notFound()
+    {
+        return view('404');
+    }
 }

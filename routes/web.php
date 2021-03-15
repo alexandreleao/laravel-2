@@ -36,6 +36,4 @@ Route::prefix('/servicos')->group(function(){
 
 });
 
-Route::fallback(function () {
-    return view('404');
-});
+Route::fallback([HomeController::class, 'notFound']);
