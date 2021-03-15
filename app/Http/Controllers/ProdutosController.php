@@ -1,14 +1,10 @@
 <?php
-#Adiçao Tabela de Serviços
 namespace App\Http\Controllers;
-
 use App\Produto;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\View;
-
-
 
 class ProdutosController extends Controller
 {
@@ -41,15 +37,10 @@ class ProdutosController extends Controller
         'titulo' => 'required',
         'descricao' => 'required',
         'imagem' => 'required'
-<<<<<<< HEAD
+
        
        ]); 
    
-=======
-
-       ]);
-
->>>>>>> 11570cf14fc1220b6d41acdc1b7a2320de988963
         $produto = new Produto;
 
         $produto->titulo = $request->titulo;
@@ -83,13 +74,6 @@ class ProdutosController extends Controller
 
         $produto->titulo = $request->titulo;
         $produto->descricao = $request->descricao;
-
-        if ($request->hasFile("imagem")) {
-            $path = $request->imagem->store("public/images");
-            $imagem = Storage::url($path);
-            $produto->imagem = $imagem ? $imagem : null;
-        }
-
       
         if($produto->save()){
             return redirect()->route('produtos.visualizar', ['id' => $produto->id ]);

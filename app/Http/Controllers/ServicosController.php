@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use App\Servico;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -44,8 +43,13 @@ class ServicosController extends Controller
         $servico = new Servico;
 
         $servico->tipo = $request->tipo;
-        $servico->descricao =$request->descricao;
+        $servico->descricao = $request->descricao;
 
+        if ($request->hasFile("imagem")) {
+            $path = $request->imagem->store("public/images");
+            $imagem = Storage::url($path);
+            $servico->imagem = $imagem ? $imagem : null;
+        }
 
         if($servico->save()){
             return redirect()->route('servicos.listar');
@@ -60,7 +64,7 @@ class ServicosController extends Controller
     {
         $servico = Servico::find($id);
 
-        return view('servicos.editar', ['servicos' => $servico]);
+        return view('servicos.editar', ['servico' => $servico]);
     }
 
     public function editarAction(Request $request, $id)
@@ -70,16 +74,10 @@ class ServicosController extends Controller
         $servico->tipo = $request->tipo;
         $servico->descricao = $request->descricao;
 
-        if ($request->hasFile("imagem")) {
-            $path = $request->imagem->store("public/images");
-            $imagem = Storage::url($path);
-            $servico->imagem = $imagem ? $imagem : null;
-        }
-
-
         if ($servico->save()) {
             return redirect()->route('servicos.visualizar', ['id' => $servico->id]);
         }
+
     }
 
     public function deletar($id)

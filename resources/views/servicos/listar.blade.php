@@ -12,7 +12,7 @@
         <div class="card">
             <div class="card-body">
             <h5 class="card-title">{{$servico->tipo}}</h5>
-            <a class="card-link" href="{{route('servico.visualizar', ['id'=> $servico->id])}}">
+            <a class="card-link" href="{{route('servicos.visualizar', ['id'=> $servico->id])}}">
                 Visualizar
             </a>
             </div>

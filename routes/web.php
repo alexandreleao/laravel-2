@@ -6,8 +6,8 @@ use App\Http\Controllers\ServicosController;
 use App\Http\Controllers\HomeController;
 
 
-Route::get('/', [HomeController::class, 'index'])->name('homepage');
-
+    Route::get('/', [HomeController::class, 'index'])->name('homepage');
+    Route::get('/', [HomeController::class, 'listar'])->name('homepage');
 
 Route::prefix('/produtos')->group(function () {
 
@@ -25,14 +25,14 @@ Route::prefix('/produtos')->group(function () {
 
 Route::prefix('/servicos')->group(function(){
     Route::get('/', [ServicosController::class,'listar'])->name('servicos.listar');
-    Route::get('/p-{id}', [ServicosController::class, 'visualizar'])->name('servicos.visualizar');
+    Route::get('/s-{id}', [ServicosController::class, 'visualizar'])->name('servicos.visualizar');
     Route::get('adicionar', [ServicosController::class, 'adicionar'])->name('servicos.adicionar');
 
-    Route::get('editar/{id}', [ServicosController::class, 'editar'])->name('produtos.editar');
+    Route::get('editar/{id}', [ServicosController::class, 'editar'])->name('servicos.editar');
     Route::post('adicionar',  [ServicosController::class, 'adicionarAction']); //Ação de adicionar novo produto
     Route::post('editar/{id}', [ServicosController::class, 'editarAction']); //Ação de edição
 
-    Route::get('apagar/{id}', [ServicosController::class,'deletar'])->name('produtos.deletar'); //Ação de deletar
+    Route::get('apagar/{id}', [ServicosController::class,'deletar'])->name('servicos.deletar'); //Ação de deletar
 
 });
 
