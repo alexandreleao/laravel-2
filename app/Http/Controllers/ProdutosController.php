@@ -43,16 +43,14 @@ class ProdutosController extends Controller
         'imagem' => 'required'
        
        ]); 
-
-        dd($request->validated(['titulo' => 'required']));
-       
+   
         $produto = new Produto;
 
         $produto->titulo = $request->titulo;
         $produto->descricao = $request->descricao;
         
         if($request->hasFile("imagem")){
-         $path = $request->imagem->store("images");
+         $path = $request->imagem->store("public/images");
          $imagem = Storage::url($path);
          $produto->imagem = $imagem ? $imagem : null;
         }
@@ -80,6 +78,13 @@ class ProdutosController extends Controller
         $produto->titulo = $request->titulo;
         $produto->descricao = $request->descricao;
 
+        if ($request->hasFile("imagem")) {
+            $path = $request->imagem->store("public/images");
+            $imagem = Storage::url($path);
+            $produto->imagem = $imagem ? $imagem : null;
+        }
+
+      
         if($produto->save()){
             return redirect()->route('produtos.visualizar', ['id' => $produto->id ]);
         }

@@ -7,7 +7,7 @@
     <div class="card-body">
         <h1 class="card-title">Editar Produto</h1>
         <form action="{{route('produtos.editar', $produto->id)}}" method="post" enctype="multipart/form-data">
-            @method('PUT')
+           
              @include('produtos.form-produtos', ['produto'=> $produto])
         </form>
        
